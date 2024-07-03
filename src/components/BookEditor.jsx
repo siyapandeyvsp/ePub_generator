@@ -3,20 +3,42 @@ import React, { useState } from 'react';
 import Page from './Page';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAdd, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-function BookEditor({ pages, setPages }) {
+function BookEditor() {
   const [title, setTitle] = useState('');
   const author="Siya Pandey";
-  const [currentPageContent, setCurrentPageContent] = useState('');
-
+ const [pages,setPages]=useState([{content:''}]);
   const addPage = () => {
-    setPages([...pages, currentPageContent]);
-    setCurrentPageContent('');
+    //setPages([...pages, currentPageContent]);
+    //setCurrentPageContent('');
+    setPages([...pages,{content:''}]);//Add an empty page as an object
   };
 
   const deletePage = () => {
-    setPages(pages.slice(0, -1));
+   //individual delete buttons 
+  // const newPages=pages.filter((_,pageIndex)=>pageIndex!==index)
+  // setPages(newPages);
+
+  // delete last page : 
+  if (pages.length>1){
+    setPages(pages.slice(0,-1));
+  }
   };
+
+const updatePageContent=(index,newContent)=>{
+    const updatedPages=pages.map((page,pageIndex)=>{
+        if (pageIndex===index){
+            return{...page,content:newContent};
+        }
+        return page;
+    });
+    setPages(updatedPages);
+};
+
+
+
 //Initializes a new JSZip instance, which will be used to build the ZIP file.
 
   const generateEbook = () => {
@@ -87,7 +109,8 @@ function BookEditor({ pages, setPages }) {
     // Add the text of the book to the ZIP file
     // Add XHTML 
     //Purpose: Iterates over each page's content stored in the pages array and adds it as XHTML files (pageX.xhtml) to the EPUB. Each XHTML file represents a page in the eBook, formatted with HTML content that includes the page title and content.
-    pages.forEach((content, index) => {
+    //pages.forEach((content, index) => {
+    pages.forEach((page, index) => {
       const text = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' + 
           '<!DOCTYPE html>' + 
           '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en" lang="en">' + 
@@ -96,7 +119,8 @@ function BookEditor({ pages, setPages }) {
           '  </head>' + 
           '  <body>' + 
           `    <section><h1>Page ${index + 1}</h1>` + 
-          `      <p>${content}</p>` + 
+          //`      <p>${content}</p>` + 
+          `      <p>${page.content}</p>` + 
           '    </section>' +
           '  </body>' + 
           '</html>';
@@ -111,48 +135,98 @@ function BookEditor({ pages, setPages }) {
     });
   };
 
-  return (
-    <div className="space-y-4">
+//   return (
+//     <div className="space-y-4">
+//       <input
+//         type="text"
+//         className="w-full px-4 py-2 border rounded"
+//         placeholder="Title of the book"
+//         value={title}
+//         onChange={(e) => setTitle(e.target.value)}
+//       />
+//       <textarea
+//         className="w-full px-4 py-2 border rounded"
+//         placeholder="Content for the current page"
+//         value={currentPageContent}
+//         onChange={(e) => setCurrentPageContent(e.target.value)}
+//       />
+//       <div className="space-x-2">
+//         <button
+//           className="px-4 py-2 bg-blue-500 text-white rounded"
+//           onClick={addPage}
+//         >
+//           Add Page
+//         </button>
+//         <button
+//           className="px-4 py-2 bg-red-500 text-white rounded"
+//           onClick={deletePage}
+//         >
+//           Delete Last Page
+//         </button>
+//         <button
+//           className="px-4 py-2 bg-green-500 text-white rounded"
+//           onClick={generateEbook}
+//         >
+//           Generate eBook
+//         </button>
+//       </div>
+
+//       <div className="space-y-4">
+//         {pages.map((content, index) => (
+//           <Page key={index} content={content} index={index} />
+//         ))}
+//       </div>
+//     </div>
+//   );
+return (
+    <div className="space-y-4  ">
+    <div className='flex justify-between space-x-50 '>
       <input
         type="text"
-        className="w-full px-4 py-2 border rounded"
+        className="  font-bold  text-2xl px-4 py-2 border w-3/4"
         placeholder="Title of the book"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      <button
+       className="px-4 py-2 bg-black  text-white rounded float-right"
+           onClick={generateEbook}
+         >
+           Generate eBook
+         </button>
+</div>
+     
+<div className='overflow-auto h-[30rem]  items-center'>
+      {pages.map((page, index) => (
+  <div key={index} className="flex justify-center py-4">
+    <div className="bg-white shadow-lg  p-6 max-w-4xl border border-gray-200">
       <textarea
-        className="w-full px-4 py-2 border rounded"
-        placeholder="Content for the current page"
-        value={currentPageContent}
-        onChange={(e) => setCurrentPageContent(e.target.value)}
+        className=" h-96 p-4  focus:ring-blue-500 focus:border-blue-500"
+        placeholder={`Content for page ${index + 1}`}
+        value={page.content}
+        onChange={(e) => updatePageContent(index, e.target.value)}
       />
-      <div className="space-x-2">
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={addPage}
-        >
-          Add Page
-        </button>
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded"
-          onClick={deletePage}
-        >
-          Delete Last Page
-        </button>
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded"
-          onClick={generateEbook}
-        >
-          Generate eBook
-        </button>
-      </div>
-
-      <div className="space-y-4">
-        {pages.map((content, index) => (
-          <Page key={index} content={content} index={index} />
-        ))}
-      </div>
     </div>
+  </div>
+))}
+
+</div>
+   <div className=' flex flex-col items-end space-y-4 sm:mr-5'>
+
+<button
+      className=" -mt-32 px-4 py-2 bg-red-500 text-white rounded"
+      onClick={() => deletePage()}
+    >
+      <FontAwesomeIcon icon={faTrash}/>
+    </button>
+    <button
+  className="px-4 py-2 bg-blue-500 shadow-lg text-white rounded-lg"
+  onClick={addPage}
+>
+  <FontAwesomeIcon icon={faAdd}/>
+</button>
+</div> 
+     </div>
   );
 }
 
