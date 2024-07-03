@@ -206,6 +206,7 @@ return (
         value={page.content}
         onChange={(e) => updatePageContent(index, e.target.value)}
       />
+      <p className='text-sm text-gray-500 text-right'>{index+1}</p>
     </div>
   </div>
 ))}
