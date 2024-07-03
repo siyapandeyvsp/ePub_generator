@@ -186,6 +186,7 @@ return (
         placeholder="Title of the book"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+       
       />
       <button
        className="px-4 py-2 bg-black  text-white rounded float-right"
@@ -204,6 +205,8 @@ return (
         placeholder={`Content for page ${index + 1}`}
         value={page.content}
         onChange={(e) => updatePageContent(index, e.target.value)}
+        rows={10}
+        style={{resize:"none"}}
       />
       <p className='text-sm text-gray-500 text-right'>{index+1}</p>
     </div>
