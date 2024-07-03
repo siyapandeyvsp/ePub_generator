@@ -1,6 +1,5 @@
 // src/components/BookEditor.js
-import React, { useState } from 'react';
-import Page from './Page';
+import  { useState } from 'react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -214,12 +213,14 @@ return (
 </div>
    <div className=' flex flex-col items-end space-y-4 sm:mr-5'>
 
-<button
-      className=" -mt-32 px-4 py-2 bg-red-500 text-white rounded"
-      onClick={() => deletePage()}
-    >
-      <FontAwesomeIcon icon={faTrash}/>
-    </button>
+   {pages.length > 1 && (
+  <button
+    className=" -mt-32 px-4 py-2 bg-red-500 text-white rounded"
+    onClick={() => deletePage()}
+  >
+    <FontAwesomeIcon icon={faTrash}/>
+  </button>
+)}
     <button
   className="px-4 py-2 bg-blue-500 shadow-lg text-white rounded-lg"
   onClick={addPage}
