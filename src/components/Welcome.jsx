@@ -12,7 +12,13 @@ const Welcome = () => {
 
           <div className="flex   items-center justify-center  gap-10 mt-10 ">
             <button
-            onClick={()=>navigate('/ebook-generator')}
+            
+            
+                onClick={()=>
+                        setTimeout(()=>{
+                            navigate('/ebook-generator')
+                        },500)
+                        }
               className="button w-40 h-16 bg-yellow-500 rounded-lg cursor-pointer select-none
     active:translate-y-2 active:[box-shadow:0_0px_0_0_#cda434,0_0px_0_0_#fde04741]
     active:border-b-[0px]
@@ -25,7 +31,11 @@ const Welcome = () => {
               </span>
             </button>
             <button
-                        onClick={()=>navigate('/ebook-reader')}
+                        onClick={()=>
+                        setTimeout(()=>{
+                            navigate('/ebook-reader')
+                        },500)
+                        }
 
               className="button w-40 h-16 bg-yellow-500 rounded-lg cursor-pointer select-none
     active:translate-y-2 active:[box-shadow:0_0px_0_0_#cda434,0_0px_0_0_#fde04741]
