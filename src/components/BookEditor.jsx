@@ -4,10 +4,9 @@ import { saveAs } from "file-saver";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
-import 'react-tooltip';
+import "react-quill/dist/quill.snow.css";
+import "react-tooltip";
 import { Tooltip } from "react-tooltip";
-
 
 function BookEditor() {
   const [title, setTitle] = useState("");
@@ -86,9 +85,13 @@ function BookEditor() {
 
     pages.forEach((page, index) => {
       const sanitizedContent = page.content
-      .replace(/&nbsp;/g, '\u00A0')
-      .replace(/<br>/g, '<br/>');
-  
+        .replace(/&nbsp;/g, "\u00A0")
+        .replace(/<br>/g, "<br/>")
+        .replace(/<img([^>]+)>/gi, "<img$1/>")
+        // Correct span tags that might be incorrectly closed
+        .replace(/<span([^>]*)>(.*?)<\/?span>/gi, "<span$1>$2</span>")
+        // Handle div tags for proper nesting
+        .replace(/<div([^>]*)>(.*?)<\/?div>/gi, "<div$1>$2</div>");
       const text =
         '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
         "<!DOCTYPE html>" +
@@ -148,29 +151,41 @@ function BookEditor() {
     setPages(updatedPages);
   };
 
-  const toolbarOptions = [
-    ['bold', 'italic', 'underline', 
-      // 'strike'
+  // const toolbarOptions = [
+  //   [
+  //     "bold",
+  //     "italic",
+  //     "underline",
+  //     // 'strike'
+  //   ], // toggled buttons
+  //   // ['blockquote', 'code-block'],
 
-    ], // toggled buttons
-    // ['blockquote', 'code-block'],
-  
-    // [{ 'header': 1 }, { 'header': 2 }], // custom button values
-    // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    // [{ 'script': 'sub'}, { 'script': 'super' }], // superscript/subscript
-    // [{ 'indent': '-1'}, { 'indent': '+1' }], // outdent/indent
-    // [{ 'direction': 'rtl' }], // text direction
-  
-    // [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+  //   // [{ 'header': 1 }, { 'header': 2 }], // custom button values
+  //   // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  //   // [{ 'script': 'sub'}, { 'script': 'super' }], // superscript/subscript
+  //   // [{ 'indent': '-1'}, { 'indent': '+1' }], // outdent/indent
+  //   // [{ 'direction': 'rtl' }], // text direction
+
+  //   // [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+  //   [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  //   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  //   [{ font: [] }],
+
+  //   // ['clean'] // remove formatting button
+  // ];
+const toolbarOptions = {
+  toolbar: [
+    ['bold', 'italic', 'underline'], // toggled buttons
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  
     [{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
     [{ 'font': [] }],
-   
-  
-    // ['clean'] // remove formatting button
-  ];
-
+  ],
+  clipboard: {
+    // Do not match visual style of the source
+    matchVisual: false,
+  },
+};
   return (
     <div className="space-y-4 relative">
       <div className="flex justify-between space-x-50">
@@ -190,8 +205,6 @@ function BookEditor() {
         </button>
       </div>
 
-    
-
       <div className="overflow-auto h-[30rem] items-center">
         {pages.map((page, index) => (
           <div
@@ -199,7 +212,7 @@ function BookEditor() {
             ref={index === pages.length - 1 ? lastPageRef : null}
             className="flex justify-center py-4"
           >
-            <div className="bg-white shadow-lg p-6 max-w-4xl border border-gray-200 flex flex-col w-2/3">
+            <div className="bg-white shadow-lg p-6 max-w-4xl  border-gray-200 flex flex-col w-2/3 overflow-hidden  ">
               <input
                 type="text"
                 className="px-4 py-2 border mb-5"
@@ -209,11 +222,15 @@ function BookEditor() {
               />
               <ReactQuill
                 value={page.content}
-                onChange={(content, delta, source, editor) => updatePageContent(index, content)}
-                className="h-96 p-4 border w-full overflow-auto"
-                modules={{ toolbar: toolbarOptions }} 
+                onChange={(content, delta, source, editor) =>
+                  updatePageContent(index, content)
+                }
+                className="h-[18rem] mb-5 w-full "
+                modules={toolbarOptions }
               />
-              <p className="text-sm text-gray-500 text-right">{index + 1}</p>
+              <p className="mt-6 -mb-2 text-sm text-gray-500 text-right">
+                {index + 1}
+              </p>
             </div>
           </div>
         ))}
@@ -231,7 +248,7 @@ function BookEditor() {
             >
               <FontAwesomeIcon icon={faTrash} />
             </button>
-            <Tooltip id="delete"/>
+            <Tooltip id="delete" />
           </>
         )}
         <button
@@ -243,8 +260,7 @@ function BookEditor() {
         >
           <FontAwesomeIcon icon={faAdd} />
         </button>
-        <Tooltip id="addChapter"/>
-
+        <Tooltip id="addChapter" />
       </div>
     </div>
   );
