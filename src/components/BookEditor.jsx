@@ -84,6 +84,17 @@ function BookEditor() {
     zip.file("OEBPS/toc.ncx", toc);
 
     pages.forEach((page, index) => {
+
+      const cssForTextSelection = `
+    <style>
+       body, p, h1, h2, h3, h4, h5, h6, span, div {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      -ms-user-select: text !important;
+    }
+    </style>
+  `;
       const sanitizedContent = page.content
         .replace(/&nbsp;/g, "\u00A0")
         .replace(/<br>/g, "<br/>")
@@ -98,6 +109,8 @@ function BookEditor() {
         '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en" lang="en">' +
         "  <head>" +
         `    <title>${page.name || ""}</title>` +
+        `${cssForTextSelection}`
+        +
         "  </head>" +
         "  <body>" +
         `    <section>
@@ -187,6 +200,9 @@ const toolbarOptions = {
   },
 };
   return (
+    <div className=" flex justify-center sm:items-center h-screen bg-gray-50 sm:p-8 overflow-hidden  ">
+      <div className="max-w-5xl mx-auto  shadow-lg rounded-lg p-6  min-w-3/4 bg-gray-100 w-full">
+         <h1 className="text-2xl font-bold text-center mb-4">eBook Generator</h1>
     <div className="space-y-4 relative">
       <div className="flex justify-between space-x-50">
         <input
@@ -222,10 +238,10 @@ const toolbarOptions = {
               />
               <ReactQuill
                 value={page.content}
-                onChange={(content, delta, source, editor) =>
+                onChange={(content) =>
                   updatePageContent(index, content)
                 }
-                className="h-[18rem] mb-5 w-full "
+                className="h-[17rem] mb-5 w-full "
                 modules={toolbarOptions }
               />
               <p className="mt-6 -mb-2 text-sm text-gray-500 text-right">
@@ -262,6 +278,8 @@ const toolbarOptions = {
         </button>
         <Tooltip id="addChapter" />
       </div>
+    </div>
+    </div>
     </div>
   );
 }
