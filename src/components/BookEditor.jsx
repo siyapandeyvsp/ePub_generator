@@ -200,10 +200,10 @@ const toolbarOptions = {
   },
 };
   return (
-    <div className=" flex justify-center sm:items-center h-screen bg-gray-50 sm:p-8 overflow-hidden  ">
-      <div className="max-w-5xl mx-auto  shadow-lg rounded-lg p-6  min-w-3/4 bg-gray-100 w-full">
-         <h1 className="text-2xl font-bold text-center mb-4">eBook Generator</h1>
-    <div className="space-y-4 relative">
+ 
+      <div className=" container  flex flex-col justify-center sm:items-center bg-gray-50    overflow-hidden max-w-5xl  shadow-lg rounded-lg   min-w-3/4  px-5 py-2 ">
+         <h1 className="text-2xl font-bold text-center mb-4 text-gray-800 " >eBook Generator</h1>
+    <div className="space-y-4 relative  w-full">
       <div className="flex justify-between space-x-50">
         <input
           type="text"
@@ -280,7 +280,7 @@ const toolbarOptions = {
       </div>
     </div>
     </div>
-    </div>
+    
   );
 }
 
