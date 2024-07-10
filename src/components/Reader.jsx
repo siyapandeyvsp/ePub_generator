@@ -3,7 +3,7 @@ import ePub from "epubjs";
 import "tailwindcss/tailwind.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faChevronLeft, faChevronRight, faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
-
+import './Reader.css';
 const Reader = ({ file }) => {
   const bookRef = useRef(null);
   const [book, setBook] = useState(null);
@@ -11,6 +11,7 @@ const Reader = ({ file }) => {
 const [isFlipping, setIsFlipping] = useState(false);
 const [isAtStart, setIsAtStart] = useState(true);
 const [isAtEnd, setIsAtEnd] = useState(false);
+const [scrollAnimation, setScrollAnimation] = useState('');
 
 
   useEffect(() => {
@@ -43,24 +44,34 @@ const [isAtEnd, setIsAtEnd] = useState(false);
     setIsAtStart(currentLocation.atStart || false);
     setIsAtEnd(currentLocation.atEnd || false);
 
-    console.log('Current Start CFI:', startCfi);
-    console.log('Current End CFI:', endCfi);
+    // console.log('Current Start CFI:', startCfi);
+    // console.log('Current End CFI:', endCfi);
   };
   const goToNextPage = () => {
-    
-    if (rendition && !isFlipping ) {
+    if (rendition && !isFlipping) {
       setIsFlipping(true);
-      rendition.next().then(() => setIsFlipping(false));
+      setScrollAnimation('scrolling-left');
+      setTimeout(() => {
+        rendition.next().then(() => {
+          setIsFlipping(false);
+          setScrollAnimation('');
+        });
+      }, 500); // Match the duration of the CSS animation
     }
   };
 
   const goToPrevPage = () => {
-    if (rendition && !isFlipping ) {
+    if (rendition && !isFlipping) {
       setIsFlipping(true);
-      rendition.prev().then(() => setIsFlipping(false));
+      setScrollAnimation('scrolling-right');
+      setTimeout(() => {
+        rendition.prev().then(() => {
+          setIsFlipping(false);
+          setScrollAnimation('');
+        });
+      }, 500); // Match the duration of the CSS animation
     }
   };
-
   // return (
   //   <div className="flex flex-col justify-center items-center h-screen">
   //     <div className="flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden relative bg-gray-100 ">
@@ -87,7 +98,7 @@ const [isAtEnd, setIsAtEnd] = useState(false);
 
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-white ">
-      <div className="relative flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden ">
+      <div className={`card-container relative flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden ${scrollAnimation}`}>
         <div ref={bookRef} className="flex w-full h-full  px-12 "></div>
         <button
           onClick={goToPrevPage}

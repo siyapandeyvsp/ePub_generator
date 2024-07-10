@@ -1,0 +1,38 @@
+/* Container to establish a 3D space - Adjusted to hide overflow */
+.card-container {
+    perspective: 1000px;
+    overflow: hidden; /* This will clip the content going outside the container */
+  }
+  
+  /* Adjusted animations for a card-like effect */
+  @keyframes cardSlideLeft {
+    0% {
+      transform: translateX(0%) rotateY(0deg);
+      opacity: 1;
+    }
+    100% {
+      /* Adjusted to prevent going outside the container */
+      transform: translateX(-50%) rotateY(-20deg);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes cardSlideRight {
+    0% {
+      transform: translateX(0%) rotateY(0deg);
+      opacity: 1;
+    }
+    100% {
+      /* Adjusted to prevent going outside the container */
+      transform: translateX(50%) rotateY(20deg);
+      opacity: 0;
+    }
+  }
+  
+  .scrolling-left {
+    animation: cardSlideLeft 0.5s ease-in-out forwards;
+  }
+  
+  .scrolling-right {
+    animation: cardSlideRight 0.5s ease-in-out forwards;
+  }
