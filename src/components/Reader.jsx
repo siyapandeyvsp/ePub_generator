@@ -4,6 +4,9 @@ import "tailwindcss/tailwind.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faChevronLeft, faChevronRight, faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import './Reader.css';
+import { useSwipeable } from "react-swipeable";
+
+
 const Reader = ({ file }) => {
   const bookRef = useRef(null);
   const [book, setBook] = useState(null);
@@ -72,6 +75,14 @@ const [scrollAnimation, setScrollAnimation] = useState('');
       }, 500); // Match the duration of the CSS animation
     }
   };
+
+  // Swipe handlers
+  const handlers = useSwipeable({
+    onSwipedLeft: () => goToNextPage(),
+    onSwipedRight: () => goToPrevPage(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true
+  });
   // return (
   //   <div className="flex flex-col justify-center items-center h-screen">
   //     <div className="flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden relative bg-gray-100 ">
@@ -98,7 +109,7 @@ const [scrollAnimation, setScrollAnimation] = useState('');
 
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-white ">
-      <div className={`card-container relative flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden ${scrollAnimation}`}>
+      <div {...handlers} className={`card-container relative flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden ${scrollAnimation}`}>
         <div ref={bookRef} className="flex w-full h-full  px-12 "></div>
         <button
           onClick={goToPrevPage}

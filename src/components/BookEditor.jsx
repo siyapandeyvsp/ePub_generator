@@ -200,7 +200,7 @@ function BookEditor() {
           </button>
         </div>
 
-        <div className="overflow-auto h-[17rem] items-center ">
+        <div className="overflow-auto h-[27rem] items-center ">
           {pages.map((page, index) => (
             <div
               key={index}
@@ -229,7 +229,7 @@ function BookEditor() {
           ))}
         </div>
 
-        <div className="flex flex-col items-end space-y-4 sm:mr-5">
+        <div className="flex flex-col items-end space-y-4 sm:mr-5 ">
           {pages.length > 1 && (
             <>
               <button
@@ -245,7 +245,7 @@ function BookEditor() {
             </>
           )}
           <button
-            className="px-4 py-2 bg-blue-500 shadow-lg text-white rounded-lg"
+            className="px-4 py-2 mb-5 bg-blue-500 shadow-lg text-white rounded-lg "
             onClick={addPage}
             data-tooltip-id="addChapter"
             data-tooltip-content="Add Chapter"
