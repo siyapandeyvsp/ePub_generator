@@ -60,7 +60,7 @@ const BookReader = () => {
           {!selectedFile && (
             <section className="h-full overflow-auto p-8 w-full flex flex-col justify-center items-center">
               <header className="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center w-full h-full">
-                <p className="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                <p className="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center sm:w-full w-3/4">
                   <span>Drag and drop your .epub file anywhere or </span>
                 </p>
                 <input
@@ -81,15 +81,15 @@ const BookReader = () => {
           )}
           {selectedFile && !isReading && (
             <section className="flex flex-col items-center justify-center h-full px-20">
-              <div className="flex justify-center items-center mb-4">
-                <h1 className="font-semibold sm:text-lg text-gray-800 border rounded-md border-r-0 rounded-r-none w-96 flex items-center">
+              <div className="flex sm:flew-row flex-col justify-center items-center mb-4">
+                <h1 className="font-semibold sm:text-lg text-gray-800 border rounded-md  w-96 flex items-center ">
                   <div className="bg-gray-100 py-2 px-2 text-gray-700">Selected File:</div>
                   <div className="px-2 truncate w-56">{selectedFile.name}</div>
                 </h1>
                 <button
                   id="continue"
                   onClick={startReading}
-                  className="rounded-md px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-lg focus:shadow-outline focus:outline-none border-l-0 rounded-l-none"
+                  className="rounded-md px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-lg focus:shadow-outline focus:outline-none   mt-5"
                 >
                   Continue
                 </button>

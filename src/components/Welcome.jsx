@@ -3,7 +3,7 @@ const Welcome = () => {
   const navigate = useNavigate();
   return (
     <div className="h-screen flex flex-col justify-center items-center">
-      <div className="bg-gray-900 h-96 flex items-center justify-center px-20 rounded-3xl shadow-xl shadow-gray-500/40 hover:shadow-gray-900/40 hover:shadow-3xl ">
+      <div className="bg-gray-900 sm:h-96 h-full flex items-center justify-center px-20 rounded-3xl shadow-xl shadow-gray-500/40 hover:shadow-gray-900/40 hover:shadow-3xl ">
         <div className="text-center text-white">
           <h1 className="text-5xl font-bold">
             Welcome to <span className="animate-pulse">eBook House</span>

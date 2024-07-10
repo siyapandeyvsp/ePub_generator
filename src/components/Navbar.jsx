@@ -12,7 +12,7 @@ const Navbar = () => {
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
       <div className="flex-grow flex items-center justify-center">
-        <h1 className="text-3xl font-bold ">
+        <h1 className="text-3xl font-bold  ">
           <span>eBook House</span>
         </h1>
       </div>

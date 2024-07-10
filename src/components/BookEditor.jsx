@@ -228,7 +228,7 @@ const toolbarOptions = {
             ref={index === pages.length - 1 ? lastPageRef : null}
             className="flex justify-center py-4"
           >
-            <div className="bg-white shadow-lg p-6 max-w-4xl  border-gray-200 flex flex-col w-2/3 overflow-hidden  ">
+            <div className="bg-white shadow-lg p-6 max-w-4xl  border-gray-200 flex flex-col sm:w-2/3 w-5/6 overflow-hidden  ">
               <input
                 type="text"
                 className="px-4 py-2 border mb-5"
@@ -244,7 +244,7 @@ const toolbarOptions = {
                 className="h-[17rem] mb-5 w-full "
                 modules={toolbarOptions }
               />
-              <p className="mt-6 -mb-2 text-sm text-gray-500 text-right">
+              <p className="mt-6 -mb-2 text-sm text-gray-500 text-right pr-2">
                 {index + 1}
               </p>
             </div>
