@@ -121,7 +121,7 @@ const [scrollAnimation, setScrollAnimation] = useState('');
         </button>
         <button
           onClick={goToNextPage}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2  text-gray-400  hover:bg-gray-300 hover:bg-opacity-45 rounded font-bold py-2 px-2 disabled:text-transparent disabled:bg-transparent"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2  text-gray-300  hover:bg-gray-300 hover:bg-opacity-45 rounded font-bold py-2 px-2 disabled:text-transparent disabled:bg-transparent"
           disabled={isAtEnd }
           style={{ fontSize: "2rem" }}
         >
