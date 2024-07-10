@@ -84,7 +84,6 @@ function BookEditor() {
     zip.file("OEBPS/toc.ncx", toc);
 
     pages.forEach((page, index) => {
-
       const cssForTextSelection = `
     <style>
        body, p, h1, h2, h3, h4, h5, h6, span, div {
@@ -109,8 +108,7 @@ function BookEditor() {
         '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en" lang="en">' +
         "  <head>" +
         `    <title>${page.name || ""}</title>` +
-        `${cssForTextSelection}`
-        +
+        `${cssForTextSelection}` +
         "  </head>" +
         "  <body>" +
         `    <section>
@@ -164,123 +162,101 @@ function BookEditor() {
     setPages(updatedPages);
   };
 
-  // const toolbarOptions = [
-  //   [
-  //     "bold",
-  //     "italic",
-  //     "underline",
-  //     // 'strike'
-  //   ], // toggled buttons
-  //   // ['blockquote', 'code-block'],
-
-  //   // [{ 'header': 1 }, { 'header': 2 }], // custom button values
-  //   // [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-  //   // [{ 'script': 'sub'}, { 'script': 'super' }], // superscript/subscript
-  //   // [{ 'indent': '-1'}, { 'indent': '+1' }], // outdent/indent
-  //   // [{ 'direction': 'rtl' }], // text direction
-
-  //   // [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
-  //   [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-  //   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-  //   [{ font: [] }],
-
-  //   // ['clean'] // remove formatting button
-  // ];
-const toolbarOptions = {
-  toolbar: [
-    ['bold', 'italic', 'underline'], // toggled buttons
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-    [{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
-    [{ 'font': [] }],
-  ],
-  clipboard: {
-    // Do not match visual style of the source
-    matchVisual: false,
-  },
-};
-  return (
  
-      <div className=" container  flex flex-col justify-center sm:items-center bg-gray-50    overflow-hidden max-w-5xl  shadow-lg rounded-lg   min-w-3/4  px-5 py-2 ">
-         <h1 className="text-2xl font-bold text-center mb-4 text-gray-800 " >eBook Generator</h1>
-    <div className="space-y-4 relative  w-full">
-      <div className="flex justify-between space-x-50">
-        <input
-          type="text"
-          className="font-bold text-2xl px-4 py-2 border w-1/2"
-          placeholder="Title of the book"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button
-          className="px-4 py-2 bg-black text-white rounded float-right disabled:bg-gray-500 disabled:cursor-not-allowed"
-          onClick={generateEbook}
-          disabled={pages.every((page) => page.content === "")}
-        >
-          Generate eBook
-        </button>
-      </div>
-
-      <div className="overflow-auto h-[30rem] items-center">
-        {pages.map((page, index) => (
-          <div
-            key={index}
-            ref={index === pages.length - 1 ? lastPageRef : null}
-            className="flex justify-center py-4"
+  
+  const toolbarOptions = {
+    toolbar: [
+      ["bold", "italic", "underline"], // toggled buttons
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+      [{ font: [] }],
+    ],
+    clipboard: {
+      // Do not match visual style of the source
+      matchVisual: false,
+    },
+  };
+  return (
+    <div className="  flex flex-col justify-center sm:items-center bg-gray-50    max-w-5xl  shadow-lg rounded-lg   min-w-3/4  px-5    w-full">
+     
+      <div className="space-y-4   w-full  h-full ">
+      <h1 className="text-2xl font-bold text-center mb-4 text-gray-800 ">
+        eBook Generator
+      </h1>
+        <div className="flex justify-between space-x-50">
+          <input
+            type="text"
+            className="font-bold text-2xl px-4 py-2 border w-1/2"
+            placeholder="Title of the book"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <button
+            className="px-4 py-2 bg-black text-white rounded float-right disabled:bg-gray-500 disabled:cursor-not-allowed"
+            onClick={generateEbook}
+            disabled={pages.every((page) => page.content === "")}
           >
-            <div className="bg-white shadow-lg p-6 max-w-4xl  border-gray-200 flex flex-col sm:w-2/3 w-5/6 overflow-hidden  ">
-              <input
-                type="text"
-                className="px-4 py-2 border mb-5"
-                placeholder="Chapter Name"
-                value={page.name}
-                onChange={(e) => updatePageName(index, e.target.value)}
-              />
-              <ReactQuill
-                value={page.content}
-                onChange={(content) =>
-                  updatePageContent(index, content)
-                }
-                className="h-[17rem] mb-5 w-full "
-                modules={toolbarOptions }
-              />
-              <p className="mt-6 -mb-2 text-sm text-gray-500 text-right pr-2">
-                {index + 1}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+            Generate eBook
+          </button>
+        </div>
 
-      <div className="flex flex-col items-end space-y-4 sm:mr-5">
-        {pages.length > 1 && (
-          <>
-            <button
-              className="-mt-32 px-4 py-2 bg-red-500 text-white rounded"
-              onClick={deletePage}
-              data-tooltip-id="delete"
-              data-tooltip-content="Delete Chapter"
-              data-tooltip-place="left"
+        <div className="overflow-auto h-[17rem] items-center ">
+          {pages.map((page, index) => (
+            <div
+              key={index}
+              ref={index === pages.length - 1 ? lastPageRef : null}
+              className="flex justify-center py-4"
             >
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
-            <Tooltip id="delete" />
-          </>
-        )}
-        <button
-          className="px-4 py-2 bg-blue-500 shadow-lg text-white rounded-lg"
-          onClick={addPage}
-          data-tooltip-id="addChapter"
-          data-tooltip-content="Add Chapter"
-          data-tooltip-place="left"
-        >
-          <FontAwesomeIcon icon={faAdd} />
-        </button>
-        <Tooltip id="addChapter" />
+              <div className="bg-white shadow-lg p-6 max-w-4xl  border-gray-200 flex flex-col sm:w-2/3 w-5/6 overflow-hidden  ">
+                <input
+                  type="text"
+                  className="px-4 py-2 border mb-5"
+                  placeholder="Chapter Name"
+                  value={page.name}
+                  onChange={(e) => updatePageName(index, e.target.value)}
+                />
+                <ReactQuill
+                  value={page.content}
+                  onChange={(content) => updatePageContent(index, content)}
+                  className="h-[17rem] mb-5 w-full "
+                  modules={toolbarOptions}
+                />
+                <p className="mt-6 -mb-2 text-sm text-gray-500 text-right pr-2">
+                  {index + 1}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-end space-y-4 sm:mr-5">
+          {pages.length > 1 && (
+            <>
+              <button
+                className="-mt-32 px-4 py-2 bg-red-500 text-white rounded"
+                onClick={deletePage}
+                data-tooltip-id="delete"
+                data-tooltip-content="Delete Chapter"
+                data-tooltip-place="left"
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+              <Tooltip id="delete" />
+            </>
+          )}
+          <button
+            className="px-4 py-2 bg-blue-500 shadow-lg text-white rounded-lg"
+            onClick={addPage}
+            data-tooltip-id="addChapter"
+            data-tooltip-content="Add Chapter"
+            data-tooltip-place="left"
+          >
+            <FontAwesomeIcon icon={faAdd} />
+          </button>
+          <Tooltip id="addChapter" />
+        </div>
       </div>
     </div>
-    </div>
-    
   );
 }
 
