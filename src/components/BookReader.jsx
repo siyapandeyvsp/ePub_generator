@@ -47,8 +47,8 @@ const BookReader = () => {
   };
 
   return (
-    // <div className="bg-gray-500 h-screen w-screen sm:px-8 md:px-16 sm:py-8 flex justify-center">
-      <main className="container m-auto max-w-screen-lg h-[30rem] flex justify-center items-center">
+   
+      <main className="container m-auto max-w-screen-lg h-full flex justify-center items-center p-6 -mt-4 ">
         <article
           aria-label="File Upload Modal"
           className="relative h-full flex flex-col bg-white shadow-xl rounded-md w-full"

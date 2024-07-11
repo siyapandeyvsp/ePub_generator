@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import ePub from "epubjs";
 import "tailwindcss/tailwind.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faChevronLeft, faChevronRight, faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import './Reader.css';
-import { useSwipeable } from "react-swipeable";
 
 
 const Reader = ({ file }) => {
@@ -47,8 +46,8 @@ const [scrollAnimation, setScrollAnimation] = useState('');
     setIsAtStart(currentLocation.atStart || false);
     setIsAtEnd(currentLocation.atEnd || false);
 
-    // console.log('Current Start CFI:', startCfi);
-    // console.log('Current End CFI:', endCfi);
+    console.log('Current Start CFI:', startCfi);
+    console.log('Current End CFI:', endCfi);
   };
   const goToNextPage = () => {
     if (rendition && !isFlipping) {
@@ -76,41 +75,12 @@ const [scrollAnimation, setScrollAnimation] = useState('');
     }
   };
 
-  // Swipe handlers
-  const handlers = useSwipeable({
-    onSwipedLeft: () => goToNextPage(),
-    onSwipedRight: () => goToPrevPage(),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true
-  });
-  // return (
-  //   <div className="flex flex-col justify-center items-center h-screen">
-  //     <div className="flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden relative bg-gray-100 ">
-  //       <div ref={bookRef} className="flex w-full h-full "></div>
-  //     </div>
-  //     <div className="mt-4 flex justify-around w-full">
-  //       <button
-  //         onClick={goToPrevPage}
-  //         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-  //         disabled={isFlipping}
-  //       >
-  //         <FontAwesomeIcon icon={faLeftLong} /> Previous
-  //       </button>
-  //       <button
-  //         onClick={goToNextPage}
-  //         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-  //         disabled={isFlipping}
-  //       >
-  //         Next <FontAwesomeIcon icon={faRightLong} />
-  //       </button>
-  //     </div>
-  //   </div>
-  // );
 
+ 
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-white ">
-      <div {...handlers} className={`card-container relative flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden ${scrollAnimation}`}>
-        <div ref={bookRef} className="flex w-full h-full  px-12 "></div>
+    
+      <div  className={`card-container relative flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden  ${scrollAnimation}`}>
+        <div ref={bookRef} className="flex w-full h-full  px-12  "></div>
         <button
           onClick={goToPrevPage}
           className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-300  hover:bg-gray-200 hover:bg-opacity-45 rounded font-bold py-2 px-2 disabled:text-transparent disabled:bg-transparent"
@@ -128,7 +98,7 @@ const [scrollAnimation, setScrollAnimation] = useState('');
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
-    </div>
+    
   );
 };
 
