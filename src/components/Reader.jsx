@@ -79,7 +79,7 @@ const [scrollAnimation, setScrollAnimation] = useState('');
  
   return (
     
-      <div  className={`card-container relative flex shadow-2xl rounded-lg w-full h-[35rem] overflow-hidden  ${scrollAnimation}`}>
+      <div  className={`card-container relative flex shadow-2xl rounded-lg w-full h-full overflow-hidden  ${scrollAnimation}`}>
         <div ref={bookRef} className="flex w-full h-full  px-12  "></div>
         <button
           onClick={goToPrevPage}

@@ -48,7 +48,7 @@ const BookReader = () => {
 
   return (
    
-      <main className="container m-auto max-w-screen-lg h-full flex justify-center items-center p-6 -mt-4 ">
+      <main className="container m-auto max-w-screen-lg h-full flex justify-center items-center  -mt-4 ">
         <article
           aria-label="File Upload Modal"
           className="relative h-full flex flex-col bg-white shadow-xl rounded-md w-full"
@@ -80,8 +80,8 @@ const BookReader = () => {
             </section>
           )}
           {selectedFile && !isReading && (
-            <section className="flex flex-col items-center justify-center h-full px-20">
-              <div className="flex sm:flew-row flex-col justify-center items-center mb-4">
+            <section className="flex flex-col items-center justify-center h-full   p-10 ">
+              <div className="flex sm:flew-row flex-col justify-center items-center space-y-10 ">
                 <h1 className="font-semibold sm:text-lg text-gray-800 border rounded-md  w-96 flex items-center ">
                   <div className="bg-gray-100 py-2 px-2 text-gray-700">Selected File:</div>
                   <div className="px-2 truncate w-56">{selectedFile.name}</div>

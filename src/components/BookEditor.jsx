@@ -177,13 +177,11 @@ function BookEditor() {
     },
   };
   return (
-    // <div className="  flex flex-col justify-center sm:items-center bg-gray-50    max-w-5xl  shadow-lg rounded-lg   min-w-3/4  px-5    w-full">
+    <div className="  flex flex-col justify-center sm:items-center    max-w-5xl  shadow-lg rounded-lg   min-w-3/4 p-5 w-full bg-gray-50  h-full -mt-10  max-h-[37rem]">
      
-      <div className="space-y-4 flex flex-col justify-center  w-full  h-full px-5  ">
-      <h1 className="text-2xl font-bold text-center mb-4 text-gray-800 ">
-        eBook Generator
-      </h1>
-        <div className="flex justify-between space-x-50">
+      <div className="space-y-4 flex flex-col justify-center  w-full  h-full relative ">
+      
+        <div className="flex justify-between space-x-50 sm:w-full ">
           <input
             type="text"
             className="font-bold text-2xl px-4 py-2 border w-1/2"
@@ -200,17 +198,17 @@ function BookEditor() {
           </button>
         </div>
 
-        <div className="overflow-auto h-[27rem] items-center ">
+        <div className="overflow-auto h-[27rem] items-center w-full ">
           {pages.map((page, index) => (
             <div
               key={index}
               ref={index === pages.length - 1 ? lastPageRef : null}
               className="flex justify-center py-4"
             >
-              <div className="bg-white shadow-lg p-6 max-w-4xl  border-gray-200 flex flex-col sm:w-2/3 w-5/6 overflow-hidden  ">
+              <div className="bg-white shadow-lg p-6 max-w-5xl  border-gray-200 flex flex-col overflow-hidden  w-full">
                 <input
                   type="text"
-                  className="px-4 py-2 border mb-5"
+                  className="px-4 py-2 border mb-5 "
                   placeholder="Chapter Name"
                   value={page.name}
                   onChange={(e) => updatePageName(index, e.target.value)}
@@ -229,7 +227,7 @@ function BookEditor() {
           ))}
         </div>
 
-        <div className="flex flex-col items-end space-y-4 sm:mr-5 ">
+        <div className="flex flex-col justify-end items-end space-y-4  absolute sm:mr-5 right-0 bottom-0">
           {pages.length > 1 && (
             <>
               <button
@@ -256,7 +254,7 @@ function BookEditor() {
           <Tooltip id="addChapter" />
         </div>
       </div>
-    // </div>
+     </div>
   );
 }
 
