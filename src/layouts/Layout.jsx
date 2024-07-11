@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <div className='flex bg-white flex-col items-center justify-start  sm:pt-5 sm:p-10 h-screen  '>
       <Navbar/>
-      <div className='flex justify-center items-center w-full bg-gray-200 bg-opacity-50 rounded-md  rounded-t-none shadow-xl h-[95vh] p-12 pt-5 max-w-screen-lg  '>
+      <div className='flex justify-center items-center w-full bg-gray-200 bg-opacity-50 rounded-md  rounded-t-none shadow-xl h-[95vh] sm:p-12 sm:pt-5 max-w-screen-lg  '>
 
       <Outlet/>
       </div>
