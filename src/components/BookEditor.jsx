@@ -177,9 +177,9 @@ function BookEditor() {
     },
   };
   return (
-    <div className="  flex flex-col justify-center sm:items-center bg-gray-50    max-w-5xl  shadow-lg rounded-lg   min-w-3/4  px-5    w-full">
+    // <div className="  flex flex-col justify-center sm:items-center bg-gray-50    max-w-5xl  shadow-lg rounded-lg   min-w-3/4  px-5    w-full">
      
-      <div className="space-y-4   w-full  h-full ">
+      <div className="space-y-4 flex flex-col justify-center  w-full  h-full px-5  ">
       <h1 className="text-2xl font-bold text-center mb-4 text-gray-800 ">
         eBook Generator
       </h1>
@@ -256,7 +256,7 @@ function BookEditor() {
           <Tooltip id="addChapter" />
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

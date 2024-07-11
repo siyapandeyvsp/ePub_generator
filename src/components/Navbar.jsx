@@ -6,7 +6,7 @@ const Navbar = () => {
     const navigate=useNavigate();
   return (
     <div className="container max-w-screen-lg  flex items-center justify-between px-10 rounded-lg rounded-b-none text-gray-800 relative ">
-      <button className="flex items-center absolute top-8 left-10  z-10 "
+      <button className="flex items-center absolute top-8 left-6  z-10 "
       onClick={()=>navigate(-1)}
       >
         <FontAwesomeIcon icon={faArrowLeft} />
