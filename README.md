@@ -31,9 +31,13 @@ Follow these steps to install and setup the Epub Generator and Reader:
 1. Clone the repository to your local machine or download the source code as a ZIP file
 2. Navigate to the project's root directory using the terminal or command prompt
 3. Run the following command to install the project dependencies
-   npm install
+   ```
+    npm install
+   ```
 4. now run the following command
-   npm run dev
+   ```
+    npm run dev
+   ```
 
 ## License
 This project is open source and released under the MIT License.
