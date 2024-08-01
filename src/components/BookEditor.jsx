@@ -166,13 +166,12 @@ function BookEditor() {
   
   const toolbarOptions = {
     toolbar: [
-      ["bold", "italic", "underline"], // toggled buttons
+      ["bold", "italic", "underline"], 
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+      [{ color: [] }, { background: [] }], 
       [{ font: [] }],
     ],
-    clipboard: {
-      // Do not match visual style of the source
+    clipboard: {      
       matchVisual: false,
     },
   };

@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import './Reader.css';
 
-
 const Reader = ({ file }) => {
   const bookRef = useRef(null);
   const [book, setBook] = useState(null);
@@ -14,7 +13,6 @@ const [isFlipping, setIsFlipping] = useState(false);
 const [isAtStart, setIsAtStart] = useState(true);
 const [isAtEnd, setIsAtEnd] = useState(false);
 const [scrollAnimation, setScrollAnimation] = useState('');
-
 
   useEffect(() => {
     const reader = new FileReader();
@@ -41,8 +39,6 @@ const [scrollAnimation, setScrollAnimation] = useState('');
     const startCfi = currentLocation?.start?.cfi ?? 'Start CFI not available';
     const endCfi = currentLocation?.end?.cfi ?? 'End CFI not available';
 
-    // Update button availability based on currentLocation
-    // This is a simplified example. You might need to adjust the logic based on how your book's CFIs are structured
     setIsAtStart(currentLocation.atStart || false);
     setIsAtEnd(currentLocation.atEnd || false);
 
@@ -58,7 +54,7 @@ const [scrollAnimation, setScrollAnimation] = useState('');
           setIsFlipping(false);
           setScrollAnimation('');
         });
-      }, 500); // Match the duration of the CSS animation
+      }, 500); 
     }
   };
 
@@ -71,11 +67,9 @@ const [scrollAnimation, setScrollAnimation] = useState('');
           setIsFlipping(false);
           setScrollAnimation('');
         });
-      }, 500); // Match the duration of the CSS animation
+      }, 500); 
     }
   };
-
-
  
   return (
     
